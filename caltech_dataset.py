@@ -22,7 +22,7 @@ class Caltech(VisionDataset):
             raise ValueError("split must be equal to 'train' or 'test'")
 
         #TODO: check that root exists
-        with open(split + ".txt") as f:
+        with open(os.path.join(self.root, f"{split}.txt") as f:
             file_list = f.readlines()
         #remove class "BACKGROUND_Google"
         file_list = [f for f in file_list if not f.startswith("BACKGROUND_Google")]
