@@ -33,11 +33,11 @@ class Caltech(VisionDataset):
         self.y = []
         self.index = []
 
-        for (i, c) in enumerate(categories):
+        for (i, c) in enumerate(self.categories):
             files = [f.split('_')[1] for f in file_list if f.startswith(c)]
             n = len(files)
-            index.extend(files)
-            y.extend(n*[i])
+            self.index.extend(files)
+            self.y.extend(n*[i])
         #self.split = file_list
         # This defines the split you are going to use
         # (split files are called 'train.txt' and 'test.txt')
@@ -51,7 +51,7 @@ class Caltech(VisionDataset):
         - Labels should start from 0, so for Caltech you will have lables 0...100 (excluding the background class)
         '''
 
-    def __getitem__(self, index):
+    def __getitem__(self, idx):
         '''
         __getitem__ should access an element through its index
         Args:
@@ -61,10 +61,10 @@ class Caltech(VisionDataset):
             tuple: (sample, target) where target is class_index of the target class.
         '''
         img_name = os.path.join(self.root, "101_ObjectCategories",
-                                self.categories[self.y[index]],
-                                f"image_{self.index[index]: 04d}")
+                                self.categories[self.y[idx]],
+                                f"image_{self.index[idx]: 04d}")
         image = Image.open(img_name)
-        label = self.y[index]
+        label = self.y[idx]
 
         #image, label =
 
