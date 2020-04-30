@@ -34,7 +34,8 @@ class Caltech(VisionDataset):
         self.index = []
 
         for (i, c) in enumerate(self.categories):
-            files = [f.split('_')[1] for f in file_list if f.startswith(c)]
+            files = [f.split('/')[1].split('_')[1].strip('\n') 
+					 for f in file_list if f.startswith(c)]
             n = len(files)
             self.index.extend(files)
             self.y.extend(n*[i])
@@ -60,9 +61,10 @@ class Caltech(VisionDataset):
         Returns:
             tuple: (sample, target) where target is class_index of the target class.
         '''
+        #print(idx, self.index[idx], self.y[idx], self.categories[self.y[idx]])
         img_name = os.path.join(self.root, "101_ObjectCategories",
                                 self.categories[self.y[idx]],
-                                f"image_{self.index[idx]: 04d}")
+                                f"image_{self.index[idx]}")
         image = Image.open(img_name)
         label = self.y[idx]
 
