@@ -62,7 +62,7 @@ class Caltech(VisionDataset):
         '''
         img_name = os.path.join(self.root, "101_ObjectCategories",
                                 self.categories[self.y[index]],
-                                f"image_{self.index[index]: 04d})
+                                f"image_{self.index[index]: 04d}")
         image = Image.open(img_name)
         label = self.y[index]
 
